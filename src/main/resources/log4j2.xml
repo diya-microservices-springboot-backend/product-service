@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="LOG_PATTERN">
+            [%X{traceId}][%X{REQ_ID}][%X{NAME}][%level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1}:%L - %msg%n
+        </Property>
+        <Property name="BASE_URL_API">
+            logs/
+        </Property>
+    </Properties>
+    <Appenders>
+        <!-- Console Appender -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+        <!-- api debug file -->
+        <RollingFile name="debugLog-api" fileName="${BASE_URL_API}LOG-SHEET-DEBUG-API.LOG"
+                     filePattern="${BASE_URL_API}LOG-SHEET-DEBUG-API-%d{yyyy-MM-dd}.LOG.gz">
+            <LevelRangeFilter minLevel="ERROR" maxLevel="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!--            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>-->
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <!--            <Policies>-->
+            <!--                &lt;!&ndash; Rollover daily &ndash;&gt;-->
+            <!--                <TimeBasedTriggeringPolicy/>-->
+            <!--                &lt;!&ndash; Rollover based on file size &ndash;&gt;-->
+            <!--                <SizeBasedTriggeringPolicy size="10 MB"/>-->
+            <!--            </Policies>-->
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <!-- Keep up to 10 files in the archive -->
+            <!--            <DefaultRolloverStrategy max="10"/>-->
+        </RollingFile>
+
+        <!-- api info log file -->
+        <RollingFile name="infoLog-api" fileName="${BASE_URL_API}LOG-SHEET-INFO-API.LOG"
+                     filePattern="${BASE_URL_API}LOG-SHEET-INFO-API-%d{yyyy-MM-dd}.LOG.gz">
+            <LevelRangeFilter minLevel="INFO" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+
+        <!-- api error log file -->
+        <RollingFile name="errorLog-api" fileName="${BASE_URL_API}LOG-SHEET-ERROR-API.LOG"
+                     filePattern="${BASE_URL_API}LOG-SHEET-ERROR-API-%d{yyyy-MM-dd}.LOG.gz">
+            <LevelRangeFilter minLevel="ERROR" maxLevel="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+
+        <!-- api warn log file -->
+        <RollingFile name="warnLog-api" fileName="${BASE_URL_API}LOG-SHEET-WARN-API.LOG"
+                     filePattern="${BASE_URL_API}LOG-SHEET-WARN-API-%d{yyyy-MM-dd}.LOG.gz">
+            <LevelRangeFilter minLevel="WARN" maxLevel="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+
+        <!-- Async Appender -->
+        <Async name="Async">
+            <AppenderRef ref="debugLog-api"/>
+            <AppenderRef ref="infoLog-api"/>
+            <AppenderRef ref="errorLog-api"/>
+            <AppenderRef ref="warnLog-api"/>
+        </Async>
+    </Appenders>
+
+    <Loggers>
+        <!-- Root logger -->
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Async"/>
+        </Root>
+
+        <!-- Spring Framework Logs -->
+        <!--        <Logger name="org.springframework" level="info" additivity="false">-->
+        <!--            <AppenderRef ref="Console"/>-->
+        <!--            <AppenderRef ref="Async"/>-->
+        <!--        </Logger>-->
+
+        <!-- Mongodb Logs -->
+        <Logger name="org.mongodb" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Async"/>
+        </Logger>
+
+        <!-- Your application specific package -->
+        <Logger name="com.diya.microservices" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Async"/>
+        </Logger>
+
+        <!-- Hidden logs packages-->
+        <Logger name="org.springframework" level="OFF" additivity="false"/>
+        <Logger name="org.hibernate" level="OFF" additivity="false"/>
+        <Logger name="org.jboss.logging" level="OFF" additivity="false"/>
+
+    </Loggers>
+</Configuration>

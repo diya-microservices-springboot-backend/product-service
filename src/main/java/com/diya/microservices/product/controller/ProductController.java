@@ -21,11 +21,7 @@ public class ProductController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ProductResponse createProduct(@RequestBody ProductRequest productRequest) {
-//        log.info("Creating product {}", productRequest);
-        log.debug("Creating Debug Log ");
         log.error("Creating Error Log ");
-        log.trace("Creating Trace Log ");
-        log.info("Creating Info Log ");
         log.warn("Creating Warn Log ");
         return productService.createProduct(productRequest);
     }

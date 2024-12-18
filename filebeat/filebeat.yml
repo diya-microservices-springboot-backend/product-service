@@ -4,5 +4,45 @@ filebeat.inputs:
     paths:
       - /var/log/springboot/*.LOG
 
+    processors:
+      - add_fields:
+          fields:
+            log_type: 'product-service'
+
+      - add_fields:
+          when:
+            contains:
+              message: "ERROR"
+          fields:
+            log_level: 'ERROR'
+
+      - add_fields:
+          when:
+            contains:
+              message: "INFO"
+          fields:
+            log_level: 'INFO'
+
+      - add_fields:
+          when:
+            contains:
+              message: "DEBUG"
+          fields:
+            log_level: 'DEBUG'
+
+      - add_fields:
+          when:
+            contains:
+              message: "TRACE"
+          fields:
+            log_level: 'TRACE'
+
+      - add_fields:
+          when:
+            contains:
+              message: "WARN"
+          fields:
+            log_level: 'WARN'
+
 output.logstash:
   hosts: [ "logstash:5044" ]

@@ -15,17 +15,17 @@
         </Console>
 
         <!-- api debug file -->
-        <RollingFile name="debugLog-api" fileName="${BASE_URL_API}LOG-SHEET-DEBUG-API.LOG"
-                     filePattern="${BASE_URL_API}LOG-SHEET-DEBUG-API-%d{yyyy-MM-dd}.LOG.gz">
-            <LevelRangeFilter minLevel="ERROR" maxLevel="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
-            <!--            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>-->
-            <PatternLayout pattern="${LOG_PATTERN}"/>
-            <Policies>
-                <TimeBasedTriggeringPolicy/>
-            </Policies>
-            <!-- Keep up to 10 files in the archive -->
-            <!--            <DefaultRolloverStrategy max="10"/>-->
-        </RollingFile>
+<!--        <RollingFile name="debugLog-api" fileName="${BASE_URL_API}LOG-SHEET-DEBUG-API.LOG"-->
+<!--                     filePattern="${BASE_URL_API}LOG-SHEET-DEBUG-API-%d{yyyy-MM-dd}.LOG.gz">-->
+<!--            <LevelRangeFilter minLevel="ERROR" maxLevel="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>-->
+<!--            &lt;!&ndash;            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>&ndash;&gt;-->
+<!--            <PatternLayout pattern="${LOG_PATTERN}"/>-->
+<!--            <Policies>-->
+<!--                <TimeBasedTriggeringPolicy/>-->
+<!--            </Policies>-->
+<!--            &lt;!&ndash; Keep up to 10 files in the archive &ndash;&gt;-->
+<!--            &lt;!&ndash;            <DefaultRolloverStrategy max="10"/>&ndash;&gt;-->
+<!--        </RollingFile>-->
 
         <!-- api info log file -->
         <!--        <RollingFile name="infoLog-api" fileName="${BASE_URL_API}LOG-SHEET-INFO-API.LOG"-->
@@ -58,19 +58,19 @@
         <!--        </RollingFile>-->
 
         <!-- Async Appender -->
-        <Async name="Async">
-            <AppenderRef ref="debugLog-api"/>
-            <!--            <AppenderRef ref="infoLog-api"/>-->
-            <!--            <AppenderRef ref="errorLog-api"/>-->
-            <!--            <AppenderRef ref="warnLog-api"/>-->
-        </Async>
+<!--        <Async name="Async">-->
+<!--            <AppenderRef ref="debugLog-api"/>-->
+<!--            &lt;!&ndash;            <AppenderRef ref="infoLog-api"/>&ndash;&gt;-->
+<!--            &lt;!&ndash;            <AppenderRef ref="errorLog-api"/>&ndash;&gt;-->
+<!--            &lt;!&ndash;            <AppenderRef ref="warnLog-api"/>&ndash;&gt;-->
+<!--        </Async>-->
     </Appenders>
 
     <Loggers>
         <!-- Root logger -->
         <Root level="info">
             <AppenderRef ref="Console"/>
-            <AppenderRef ref="Async"/>
+<!--            <AppenderRef ref="Async"/>-->
         </Root>
 
         <!-- Spring Framework Logs -->

@@ -44,5 +44,22 @@ filebeat.inputs:
           fields:
             log_level: 'WARN'
 
+      - add_fields:
+          when:
+            not:
+              or:
+                - contains:
+                    message: "ERROR"
+                - contains:
+                    message: "INFO"
+                - contains:
+                    message: "DEBUG"
+                - contains:
+                    message: "TRACE"
+                - contains:
+                    message: "WARN"
+          fields:
+            log_level: 'UNKNOWN'
+
 output.logstash:
   hosts: [ "logstash:5044" ]

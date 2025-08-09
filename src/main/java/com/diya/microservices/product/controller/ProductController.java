@@ -2,7 +2,7 @@ package com.diya.microservices.product.controller;
 
 import com.diya.microservices.product.dto.ProductRequest;
 import com.diya.microservices.product.dto.ProductResponse;
-import com.diya.microservices.product.service.ProductService;
+import com.diya.microservices.product.service.impl.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

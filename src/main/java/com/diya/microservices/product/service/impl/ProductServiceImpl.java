@@ -4,6 +4,7 @@ import com.diya.microservices.product.dto.ProductRequest;
 import com.diya.microservices.product.dto.ProductResponse;
 import com.diya.microservices.product.model.Product;
 import com.diya.microservices.product.repository.ProductRepository;
+import com.diya.microservices.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

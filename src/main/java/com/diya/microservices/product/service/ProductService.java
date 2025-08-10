@@ -1,4 +1,4 @@
-package com.diya.microservices.product.service.impl;
+package com.diya.microservices.product.service;
 
 import com.diya.microservices.product.dto.ProductRequest;
 import com.diya.microservices.product.dto.ProductResponse;

@@ -84,10 +84,6 @@
 		</dependency>
 
 		<!-- Add Log4j2 starter -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-log4j2</artifactId>
-		</dependency>
 
 		<!-- Optional: Add Log4j2 async logging support -->
 		<dependency>
